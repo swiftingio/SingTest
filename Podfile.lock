@@ -1,0 +1,25 @@
+PODS:
+  - AudioKit (3.5.4)
+  - Chronos-Swift (0.3.0)
+  - ResearchKit (1.4.1)
+  - TuningFork (0.2.0):
+    - AudioKit (~> 3.4)
+    - Chronos-Swift (~> 0.3.0)
+  - UICircularProgressRing (1.4.3)
+
+DEPENDENCIES:
+  - AudioKit (= 3.5.4)
+  - ResearchKit
+  - TuningFork (~> 0.2.0)
+  - UICircularProgressRing
+
+SPEC CHECKSUMS:
+  AudioKit: 6525139893b171361b9599ac85dcda6d78865398
+  Chronos-Swift: 0f14508c33b7f2ede194f45fd604308b387ef455
+  ResearchKit: 3533ea3a2270e4ed7ff830e19755dc959fdfd430
+  TuningFork: 6aa4849b2b1c5e2d070df442aad0c6c29bad8cea
+  UICircularProgressRing: f90123562efc555f861f9955384a3450e81e82c0
+
+PODFILE CHECKSUM: d7bcef8d708a7bbe2c34dfe548fed511d52fbbc4
+
+COCOAPODS: 1.2.1

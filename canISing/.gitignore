@@ -1,0 +1,36 @@
+# Xcode
+#
+# After changes to this list, update the index with:
+# git rm --cached `git ls-files -i -X .gitignore`
+#
+
+.DS_Store
+.idea
+## Build generated
+DerivedData
+Build/
+*.ipa
+*.hmap
+
+.idea
+.DS_Store
+
+## Settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xcuserstate
+*.xcscmblueprint
+
+## Source Control
+*.xccheckout
+*.xcscmblueprint
+
+Pods/
+Podfile.lock

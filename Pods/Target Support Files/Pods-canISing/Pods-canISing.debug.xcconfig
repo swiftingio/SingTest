@@ -1,0 +1,12 @@
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/Chronos-Swift" "$PODS_CONFIGURATION_BUILD_DIR/ResearchKit" "$PODS_CONFIGURATION_BUILD_DIR/TuningFork" "$PODS_CONFIGURATION_BUILD_DIR/UICircularProgressRing" "${PODS_ROOT}/AudioKit/iOS"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AudioKit"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/Chronos-Swift/Chronos.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/ResearchKit/ResearchKit.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/TuningFork/TuningFork.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/UICircularProgressRing/UICircularProgressRing.framework/Headers" -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AudioKit"
+OTHER_LDFLAGS = $(inherited) -framework "AVFoundation" -framework "AudioKit" -framework "Chronos" -framework "ResearchKit" -framework "TuningFork" -framework "UICircularProgressRing"
+OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods
