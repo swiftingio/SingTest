@@ -150,7 +150,6 @@ class HearStepViewController: ORKStepViewController, NoteProgressProtocol, PlayS
         
         time = time + Dimensions.timeAccuracy
         progressX = progressX + deltaX
-
     }
 }
 

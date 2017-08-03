@@ -16,7 +16,7 @@ class TestTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        testNameLabel.font = UIFont(name:"HelveticaNeue-Bold", size: 16.0)
+        testNameLabel.font = UIFont(name:"HelveticaNeue", size: 16.0)
         levelLabel.font = UIFont(name:"HelveticaNeue-Light", size: 12.0)
         
         addSubview(testNameLabel)
@@ -36,28 +36,17 @@ class TestTableViewCell: UITableViewCell {
         
         var constraints: [NSLayoutConstraint] = []
         
-        constraints.append(testNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20))
-        constraints.append(testNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor))
-        constraints.append(testNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8))
-        constraints.append(testNameLabel.bottomAnchor.constraint(equalTo: levelLabel.topAnchor, constant: -2))
+        constraints.append(testNameLabel.leadingAnchor.constraint(equalTo:
+            leadingAnchor, constant: 20))
+        constraints.append(testNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor))
+        constraints.append(testNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8))
+        constraints.append(testNameLabel.bottomAnchor.constraint(equalTo: levelLabel.topAnchor, constant: -10))
         
         constraints.append(levelLabel.leadingAnchor.constraint(equalTo: testNameLabel.leadingAnchor))
-        constraints.append(levelLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor))
-        constraints.append(levelLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8))
+        constraints.append(levelLabel.trailingAnchor.constraint(equalTo: trailingAnchor))
+        constraints.append(levelLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8))
         
         NSLayoutConstraint.activate(constraints)
         
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

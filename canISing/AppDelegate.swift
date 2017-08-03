@@ -8,30 +8,6 @@
 
 import UIKit
 
-
-//Done
-
-//-add tabbar http://swiftdeveloperblog.com/code-examples/create-uitabbarcontroller-programmatically/
-// wyciąć ćwiczenia 1, 2, 3, 4
-//- sprawdzić jak działą tuner od audio kit
-
-//To do:
-// add protocol extensoions
-// end task nie działa
-// use only dimensions structs
-// remove tabbar
-// add result label
-// poczytać o skalach żeńskich i męskich
-// add octave done view to NoteProgressBar
-// check what ocateve do yo have
-// use NoteProgressBar in singsetpview
-// build Auidokot microphone app on device
-// build singe viwcontroller to display different of cases
-//- add repeat button and next button
-//- warm your voice exercise
-//- zrobić custom step http://blog.shazino.com/articles/dev/researchkit-new-active-task/
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

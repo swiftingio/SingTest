@@ -13,7 +13,7 @@ class NoteProgressBar: UIProgressView {
     var note: Note!
     var duration: Float = 0 // in milisecons
     var tempProgress: Float = 0
-    var downOctaveView: UIView = UIView()
+    var downOctaveProgress: UIProgressView = UIProgressView()
     var timer: Timer?
     var downOctaveFreq: Float {
         return self.note.frequency / 2
@@ -21,16 +21,21 @@ class NoteProgressBar: UIProgressView {
     
     init(note: Note, duration: Float) {
         super.init(frame: CGRect.zero)
+        
         self.note = note
         self.duration = duration
-        progressTintColor = .red
+        progressTintColor = UIColor.red.withAlphaComponent(0.6)
         progress = 0
         trackTintColor = UIColor.red.withAlphaComponent(0.3)
-        downOctaveView.backgroundColor = UIColor.blue.withAlphaComponent(0.3)
-        downOctaveView.translatesAutoresizingMaskIntoConstraints = false
+        
+        downOctaveProgress.progress = 0
+        downOctaveProgress.trackTintColor = UIColor.blue.withAlphaComponent(0.3)
+        downOctaveProgress.progressTintColor = UIColor.blue.withAlphaComponent(0.6)
+        
+        downOctaveProgress.translatesAutoresizingMaskIntoConstraints = false
         translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(downOctaveView)
+        addSubview(downOctaveProgress)
     }
     
     func clear(withAlhpa alpha: CGFloat = 1) {
@@ -38,6 +43,7 @@ class NoteProgressBar: UIProgressView {
         progress = 0
         timer?.invalidate()
         timer = nil
+        downOctaveProgress.progress = 0
         self.alpha = alpha
     }
     

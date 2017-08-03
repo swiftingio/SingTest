@@ -20,11 +20,12 @@ class SingTestListController: UITableViewController, ORKTaskViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Sing Test"
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 80
+        tableView.tableFooterView = UIView()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
-        
         tableView.register(TestTableViewCell.self, forCellReuseIdentifier: String(describing: TestTableViewCell.self))
     }
     
@@ -81,7 +82,6 @@ class SingTestListController: UITableViewController, ORKTaskViewControllerDelega
     func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         self.dismiss(animated: true, completion: nil)
     }
-    
 }
 
 

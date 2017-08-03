@@ -36,7 +36,6 @@ extension NoteProgressProtocol {
             
             let currentTimeSum = notes.filter { notes.index(of: $0)! < index }.reduce(0.0) { $0 + $1.duration }
             if time == Float(currentTimeSum) {
-                print(currentTimeSum)
                 note.startTimer()
             }
             
@@ -45,6 +44,7 @@ extension NoteProgressProtocol {
             if note.duration <= Float(timer.timeInterval * 1000) {
                 note.tempProgress = note.tempProgress + deltaX
                 note.setProgress(note.tempProgress / (Dimensions.width / Float(notes.count)), animated: true)
+                note.downOctaveProgress.setProgress(note.tempProgress / (Dimensions.width / Float(notes.count)), animated: true)
             }
         }
     }

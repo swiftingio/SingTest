@@ -15,21 +15,23 @@ import UICircularProgressRing
 class SingStepViewController: ORKStepViewController, NoteProgressProtocol, SingProgressProtocol {
     
     var timer: Timer?
+    var waitTimer: Timer?
     var singTest: Test?
     var notes: [NoteProgressBar] = []
     
-    fileprivate let waitDuration: CGFloat = 4
-    fileprivate var time : Float = 0.0
     var progressX: Float = 0
-    fileprivate var mic: AKMicrophone!
     var tracker: AKFrequencyTracker!
-    fileprivate var silence: AKBooster!
     
+    fileprivate let waitDuration: CGFloat = 3
+    fileprivate var timeRemaining: Float = 0.0
+    fileprivate var time : Float = 0.0
+    fileprivate var mic: AKMicrophone!
+    fileprivate var silence: AKBooster!
     fileprivate let nextButton = UIButton(type: .system)
     fileprivate let noteLabel: UILabel = UILabel()
     fileprivate let repeatButton = RoundedButton(frame: CGRect.zero)
     fileprivate let draftView = UIView()
-    fileprivate let progressRingView = UICircularProgressRingView()
+    fileprivate let progressLinear  = UIProgressView()
     fileprivate let startSingLabel = UILabel()
     fileprivate let topMarginOffset = 64
     
@@ -55,9 +57,6 @@ class SingStepViewController: ORKStepViewController, NoteProgressProtocol, SingP
                             $0.alpha = 1
                     }
         })
-        
-        progressRingView.setProgress(value: 0, animationDuration: 4.0) {
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -104,20 +103,14 @@ class SingStepViewController: ORKStepViewController, NoteProgressProtocol, SingP
         view.addSubview(draftView)
         view.addSubview(nextButton)
         view.addSubview(repeatButton)
-        view.addSubview(progressRingView)
+        view.addSubview(progressLinear)
         view.addSubview(startSingLabel)
         view.addSubview(noteLabel)
         
-        progressRingView.maxValue = waitDuration
-        progressRingView.value = waitDuration
-        progressRingView.outerRingWidth = 1.0
-        progressRingView.innerRingWidth = 1.0
-        progressRingView.viewStyle = 2
-        progressRingView.innerRingColor = .white
-        progressRingView.outerRingColor = #colorLiteral(red: 0.7366499305, green: 0.3746042848, blue: 0.3821410239, alpha: 1)
-        progressRingView.valueIndicator = ""
-        progressRingView.startAngle = 270
-        progressRingView.delegate = self
+        progressLinear.progress = 0
+        progressLinear.trackTintColor = UIColor.red.withAlphaComponent(0.3)
+        progressLinear.progressTintColor = UIColor.red.withAlphaComponent(0.6)
+        waitTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateProgressLinear), userInfo: nil, repeats: true)
         
         AKSettings.audioInputEnabled = true
         mic = AKMicrophone()
@@ -132,8 +125,8 @@ class SingStepViewController: ORKStepViewController, NoteProgressProtocol, SingP
         repeatButton.translatesAutoresizingMaskIntoConstraints = false
         draftView.translatesAutoresizingMaskIntoConstraints = false
         noteLabel.translatesAutoresizingMaskIntoConstraints = false
-        progressRingView.translatesAutoresizingMaskIntoConstraints = false
         startSingLabel.translatesAutoresizingMaskIntoConstraints = false
+        progressLinear.translatesAutoresizingMaskIntoConstraints = false
         
         var constrains: [NSLayoutConstraint] = []
         
@@ -141,10 +134,11 @@ class SingStepViewController: ORKStepViewController, NoteProgressProtocol, SingP
         constrains.append(startSingLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor))
         constrains.append(startSingLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor))
         
-        constrains.append(progressRingView.topAnchor.constraint(equalTo: view.topAnchor, constant: 55))
-        constrains.append(progressRingView.heightAnchor.constraint(equalToConstant: 70))
-        constrains.append(progressRingView.widthAnchor.constraint(equalToConstant: 70))
-        constrains.append(progressRingView.centerXAnchor.constraint(equalTo: view.centerXAnchor))
+    
+        constrains.append(progressLinear.topAnchor.constraint(equalTo: view.topAnchor, constant: 55))
+        constrains.append(progressLinear.heightAnchor.constraint(equalToConstant: 10))
+        constrains.append(progressLinear.leadingAnchor.constraint(equalTo: view.leadingAnchor))
+        constrains.append(progressLinear.trailingAnchor.constraint(equalTo: view.trailingAnchor))
         
         constrains.append(noteLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10))
         constrains.append(noteLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor))
@@ -159,10 +153,10 @@ class SingStepViewController: ORKStepViewController, NoteProgressProtocol, SingP
             constrains.append(note.heightAnchor.constraint(equalToConstant: CGFloat(Dimensions.noteBarHeight)))
             constrains.append(note.widthAnchor.constraint(equalToConstant: CGFloat(Dimensions.width * note.duration / testDuration)))
             
-            constrains.append(note.downOctaveView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -CGFloat(note.downOctaveFreq * Dimensions.scale)))
-            constrains.append(note.downOctaveView.leadingAnchor.constraint(equalTo: previousLeading))
-            constrains.append(note.downOctaveView.heightAnchor.constraint(equalToConstant: CGFloat(Dimensions.noteBarHeight)))
-            constrains.append(note.downOctaveView.widthAnchor.constraint(equalToConstant:CGFloat(Dimensions.width * note.duration / testDuration)))
+            constrains.append(note.downOctaveProgress.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -CGFloat(note.downOctaveFreq * Dimensions.scale)))
+            constrains.append(note.downOctaveProgress.leadingAnchor.constraint(equalTo: previousLeading))
+            constrains.append(note.downOctaveProgress.heightAnchor.constraint(equalToConstant: CGFloat(Dimensions.noteBarHeight)))
+            constrains.append(note.downOctaveProgress.widthAnchor.constraint(equalToConstant:CGFloat(Dimensions.width * note.duration / testDuration)))
         }
 
         constrains.append(repeatButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -12))
@@ -189,8 +183,8 @@ class SingStepViewController: ORKStepViewController, NoteProgressProtocol, SingP
                                                        y: y,
                                                        width: Int(deltaX),
                                                        height: Int(Dimensions.noteBarHeight)))
-            soundSampleView.backgroundColor = .blue
-            soundSampleView.alpha = 0.5
+            soundSampleView.backgroundColor = .green
+            soundSampleView.alpha = 1.0
             draftView.addSubview(soundSampleView)
             noteLabel.text = "\(MusicConst.noteNamesWithSharps[index])\(octave)"
         }
@@ -198,6 +192,20 @@ class SingStepViewController: ORKStepViewController, NoteProgressProtocol, SingP
         setPianoProgress(withTime: time)
         time = time + Dimensions.timeAccuracy
         progressX = progressX + deltaX
+    }
+    
+    func updateProgressLinear() {
+        
+        timeRemaining += 0.01
+        let completionPercentage = Int(((Float(waitDuration) - Float(timeRemaining)))) + 1
+        startSingLabel.text = " Start sing in \(completionPercentage) s"
+        progressLinear.setProgress(Float(timeRemaining)/Float(waitDuration), animated: false)
+    
+        if(progressLinear.progress == 1.0) {
+            waitTimer?.invalidate()
+            startSingLabel.isHidden = true
+            timer = Timer.scheduledTimer(timeInterval: Dimensions.timeAccuracy / 1000, target: self, selector:#selector(setProgress), userInfo: nil, repeats: true)
+        }
     }
     
     func goNextPressed() {
@@ -215,12 +223,14 @@ class SingStepViewController: ORKStepViewController, NoteProgressProtocol, SingP
         }
         
         noteLabel.isHidden = true
-        progressRingView.isHidden = false
         startSingLabel.isHidden = false
+        
         timer?.invalidate()
+        waitTimer?.invalidate()
+        
         progressX = 0
         time = 0
-        
+        timeRemaining = 0
         UIView.animate(withDuration: 0.5,
                        delay: TimeInterval(waitDuration - CGFloat(0.5)),
                        options: .curveLinear,
@@ -232,21 +242,9 @@ class SingStepViewController: ORKStepViewController, NoteProgressProtocol, SingP
 
         })
         
-        progressRingView.setProgress(value: 0, animationDuration: TimeInterval(waitDuration)) {
-            self.noteLabel.isHidden = false
-        }
-    }
-}
+        progressLinear.progress = 0
+        waitTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateProgressLinear), userInfo: nil, repeats: true)
 
-extension SingStepViewController: UICircularProgressRingDelegate {
-    func finishedUpdatingProgress(forRing ring: UICircularProgressRingView) {
-        if ring.currentValue == 0 {
-            progressRingView.isHidden = true
-            progressRingView.value = 4
-            startSingLabel.isHidden = true
-            
-            timer = Timer.scheduledTimer(timeInterval: Dimensions.timeAccuracy / 1000, target: self, selector:#selector(setProgress), userInfo: nil, repeats: true)
-        }
     }
 }
 
