@@ -1,6 +1,0 @@
-framework module Pods_canISing {
-  umbrella header "Pods-canISing-umbrella.h"
-
-  export *
-  module * { export * }
-}

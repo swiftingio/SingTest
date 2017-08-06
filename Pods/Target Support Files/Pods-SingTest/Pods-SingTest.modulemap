@@ -1,0 +1,6 @@
+framework module Pods_SingTest {
+  umbrella header "Pods-SingTest-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -40,7 +40,7 @@
 		1FFE21141EFEBF8C005BBBA4 /* PlaySoundProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE21131EFEBF8C005BBBA4 /* PlaySoundProtocol.swift */; };
 		1FFE21171EFFE0BD005BBBA4 /* SingProgressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE21161EFFE0BD005BBBA4 /* SingProgressProtocol.swift */; };
 		1FFE21191F00CF28005BBBA4 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 1FFE21181F00CF28005BBBA4 /* .gitignore */; };
-		DC9AC2937227D602D45BBB88 /* Pods_canISing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2038DF172CAFB48EB2C7EEB9 /* Pods_canISing.framework */; };
+		6567E23785A1BC30FB744548 /* Pods_SingTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12BE466A099D2E8ADA11528A /* Pods_SingTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		02467109DF54AB4A0F935A74 /* Pods-canISing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-canISing.release.xcconfig"; path = "Pods/Target Support Files/Pods-canISing/Pods-canISing.release.xcconfig"; sourceTree = "<group>"; };
+		12BE466A099D2E8ADA11528A /* Pods_SingTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1960791EC11AC3001C96BA /* SingTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F19607C1EC11AC3001C96BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F19607E1EC11AC3001C96BA /* SingTestListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingTestListController.swift; sourceTree = "<group>"; };
@@ -94,6 +95,8 @@
 		1FFE21161EFFE0BD005BBBA4 /* SingProgressProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingProgressProtocol.swift; sourceTree = "<group>"; };
 		1FFE21181F00CF28005BBBA4 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		2038DF172CAFB48EB2C7EEB9 /* Pods_canISing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_canISing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		55B357ABC8DF8795D39313F0 /* Pods-SingTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SingTest/Pods-SingTest.debug.xcconfig"; sourceTree = "<group>"; };
+		628705C039794A7C9298B2A3 /* Pods-SingTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-SingTest/Pods-SingTest.release.xcconfig"; sourceTree = "<group>"; };
 		A43540D152D4FE9BC58AEC69 /* Pods-canISing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-canISing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-canISing/Pods-canISing.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,7 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC9AC2937227D602D45BBB88 /* Pods_canISing.framework in Frameworks */,
+				6567E23785A1BC30FB744548 /* Pods_SingTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +224,8 @@
 			children = (
 				A43540D152D4FE9BC58AEC69 /* Pods-canISing.debug.xcconfig */,
 				02467109DF54AB4A0F935A74 /* Pods-canISing.release.xcconfig */,
+				55B357ABC8DF8795D39313F0 /* Pods-SingTest.debug.xcconfig */,
+				628705C039794A7C9298B2A3 /* Pods-SingTest.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -229,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				2038DF172CAFB48EB2C7EEB9 /* Pods_canISing.framework */,
+				12BE466A099D2E8ADA11528A /* Pods_SingTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -325,7 +331,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		85DFCB822DA8C20206F225A4 /* [CP] Embed Pods Frameworks */ = {
@@ -340,7 +346,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-canISing/Pods-canISing-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SingTest/Pods-SingTest-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B542377F7468A7B077ABCC4F /* [CP] Copy Pods Resources */ = {
@@ -355,7 +361,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-canISing/Pods-canISing-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SingTest/Pods-SingTest-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -507,7 +513,7 @@
 		};
 		1F19608C1EC11AC3001C96BA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A43540D152D4FE9BC58AEC69 /* Pods-canISing.debug.xcconfig */;
+			baseConfigurationReference = 55B357ABC8DF8795D39313F0 /* Pods-SingTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
@@ -521,7 +527,7 @@
 		};
 		1F19608D1EC11AC3001C96BA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 02467109DF54AB4A0F935A74 /* Pods-canISing.release.xcconfig */;
+			baseConfigurationReference = 628705C039794A7C9298B2A3 /* Pods-SingTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
